@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  jsonimport:
+    build: .
+    volumes:
+      - ./data:/app/data
+    command: ["python", "import_json_files.py"]
+

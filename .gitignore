@@ -1,0 +1,10 @@
+# すべてのJSONデータ除外（ディレクトリ含め）
+data/**/*.json
+
+# SQLite DBファイル（将来コンテナ外に出すことがあれば）
+*.db
+
+# Pythonキャッシュ
+__pycache__/
+*.pyc
+
