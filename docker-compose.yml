@@ -1,8 +1,21 @@
-version: '3.8'
+version: "3.8"
 services:
   jsonimport:
     build: .
+    # JSON はホストと共有
     volumes:
-      - ./data:/app/data
+      - ./data:/app/data           # ← ここはそのまま
+      - convdb:/app/db             # ← ★ named-volume
+
     command: ["python", "import_json_files.py"]
 
+  # 入って調べる用の便利シェル
+  dbshell:
+    image: jsonimport              # ← 同じイメージを再利用
+    entrypoint: ["bash"]
+    volumes:
+      - convdb:/app/db             # ↑ 同じボリュームをマウント
+      - ./data:/app/data           # JSON も一応
+
+volumes:
+  convdb:                           # ★ ホストにパスを持たない named-volume
